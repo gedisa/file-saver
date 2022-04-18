@@ -21,15 +21,15 @@ import java.io.File
 import java.io.OutputStream
 
 
-private const val SAVE_FILE = 19112
 
 class Dialog(private val activity: Activity) : PluginRegistry.ActivityResultListener {
     private var result: MethodChannel.Result? = null
     private var bytes: ByteArray? = null
     private var fileName: String? = null
+    private var requestCode: Int? = null
     private val TAG = "Dialog Activity"
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
-        if (requestCode == SAVE_FILE &&  resultCode == Activity.RESULT_OK && data?.data != null) {
+        if (requestCode == this.requestCode &&  resultCode == Activity.RESULT_OK && data?.data != null) {
             Log.d(TAG, "Starting file operation")
             completeFileOperation(data.data!!)
         } else {
@@ -43,12 +43,14 @@ class Dialog(private val activity: Activity) : PluginRegistry.ActivityResultList
         fileName: String?,
         bytes: ByteArray?,
         type: String?,
+        requestCode: Int,
         result: MethodChannel.Result
     ) {
         Log.d(TAG, "Opening File Manager")
         this.result = result
         this.bytes = bytes
         this.fileName = fileName
+        this.requestCode = requestCode
         val intent =
                 Intent(Intent.ACTION_CREATE_DOCUMENT)
         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)

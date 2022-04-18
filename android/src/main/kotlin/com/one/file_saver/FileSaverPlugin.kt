@@ -59,7 +59,7 @@ class FileSaverPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
                 }
                 "saveAs" -> {
                     Log.d(tag, "Save as Method Called")
-                    dialog!!.openFileManager(fileName = call.argument("name"), bytes = call.argument("bytes"), type = call.argument("type"), result = result)
+                    dialog!!.openFileManager(fileName = call.argument("name"), bytes = call.argument("bytes"), type = call.argument("type"), result = result, requestCode = call.argument("requestCode"))
                 }
                 else -> {
                     Log.d(tag, "Unknown Method called " + call.method!!)

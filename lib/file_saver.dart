@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
@@ -276,12 +277,14 @@ class FileSaver {
   /// Note:- This Method only works on Android for time being and other platforms will be added soon
   Future<String> saveAs(
       String name, Uint8List bytes, String ext, MimeType mimeType) async {
+    Random random = Random();
     String _mimeType = _getType(mimeType);
     Map<dynamic, dynamic> data = {
       'name': mimeType == MimeType.OTHER ? name + "." + ext : name,
       'ext': ext,
       'bytes': bytes,
-      'type': _mimeType
+      'type': _mimeType,
+      'requestCode': random.nextInt(1000000)
     };
     String _path = await _openFileManager(data);
     return _path;
