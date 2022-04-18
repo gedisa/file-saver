@@ -43,7 +43,7 @@ class Dialog(private val activity: Activity) : PluginRegistry.ActivityResultList
         fileName: String?,
         bytes: ByteArray?,
         type: String?,
-        requestCode: Int,
+        requestCode: Int?,
         result: MethodChannel.Result
     ) {
         Log.d(TAG, "Opening File Manager")
