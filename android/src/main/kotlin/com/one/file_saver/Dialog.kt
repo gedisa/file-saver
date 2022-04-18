@@ -71,7 +71,6 @@ class Dialog(private val activity: Activity) : PluginRegistry.ActivityResultList
                 //result?.success(getRealPathFromUri(activity, uri))
             } catch (e: SecurityException) {
                 Log.d(TAG, "Security Exception while saving file" + e.message)
-
                 result?.error("Security Exception", e.localizedMessage, e)
             } catch (e: Exception) {
                 Log.d(TAG, "Exception while saving file" + e.message)
@@ -83,7 +82,6 @@ class Dialog(private val activity: Activity) : PluginRegistry.ActivityResultList
     private fun saveFile(uri: Uri) {
         try {
             Log.d(TAG, "Saving file")
-
             val opStream =  activity.contentResolver.openOutputStream(uri)
             opStream?.write(bytes)
 
