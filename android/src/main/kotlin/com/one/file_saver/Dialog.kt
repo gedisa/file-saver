@@ -63,19 +63,24 @@ class Dialog(private val activity: Activity) : PluginRegistry.ActivityResultList
     }
 
     private fun completeFileOperation(uri: Uri) {
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                saveFile(uri)
-                val fileUtils = FileUtils(activity)
-                result?.success(fileUtils.getPath(uri));
-                //result?.success(getRealPathFromUri(activity, uri))
-            } catch (e: SecurityException) {
+        try {
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                    saveFile(uri)
+                    val fileUtils = FileUtils(activity)
+                    result!!.success(fileUtils.getPath(uri));
+                    //result?.success(getRealPathFromUri(activity, uri))
+                }/* catch (e: SecurityException) {
                 Log.d(TAG, "Security Exception while saving file" + e.message)
                 result?.error("Security Exception", e.localizedMessage, e)
-            } catch (e: Exception) {
-                Log.d(TAG, "Exception while saving file" + e.message)
-                result?.error("Error", e.localizedMessage, e)
+            } */catch (e: Exception) {
+                    Log.d(TAG, "Exception while saving file" + e.message)
+                    result!!.error("Error", e.localizedMessage, e)
+                }
             }
+        }
+        catch (e: java.lang.Exception) {
+            result!!.error("Error", e.localizedMessage, e)
         }
     }
 
