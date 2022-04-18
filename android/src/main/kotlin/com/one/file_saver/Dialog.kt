@@ -61,7 +61,7 @@ class Dialog(private val activity: Activity) : PluginRegistry.ActivityResultList
         intent.flags = (Intent.FLAG_GRANT_READ_URI_PERMISSION
                 or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                 or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
-        activity.startActivityForResult(intent, SAVE_FILE)
+        activity.startActivityForResult(intent, requestCode!!)
     }
 
     private fun completeFileOperation(uri: Uri) {
