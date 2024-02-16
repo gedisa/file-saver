@@ -27,7 +27,7 @@ apply plugin: 'kotlin-android'
 
 android {
     namespace "com.incrediblezayed.file_saver"
-    compileSdk 34
+    compileSdk 33
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
